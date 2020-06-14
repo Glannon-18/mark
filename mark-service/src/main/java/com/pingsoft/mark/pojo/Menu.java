@@ -2,11 +2,13 @@ package com.pingsoft.mark.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author wkw
@@ -37,6 +39,11 @@ public class Menu implements Serializable {
 
     private Boolean enabled;
 
+    private List<Menu> children;
+
+    private List<Role> roles;
+
+
     public Long getId() {
         return id;
     }
@@ -44,6 +51,7 @@ public class Menu implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getUrl() {
         return url;
     }
@@ -51,6 +59,7 @@ public class Menu implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
     public String getPath() {
         return path;
     }
@@ -58,6 +67,7 @@ public class Menu implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
     public String getComponent() {
         return component;
     }
@@ -65,6 +75,7 @@ public class Menu implements Serializable {
     public void setComponent(String component) {
         this.component = component;
     }
+
     public String getName() {
         return name;
     }
@@ -72,6 +83,7 @@ public class Menu implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getIconCls() {
         return iconCls;
     }
@@ -79,6 +91,7 @@ public class Menu implements Serializable {
     public void setIconCls(String iconCls) {
         this.iconCls = iconCls;
     }
+
     public Boolean getKeepAlive() {
         return keepAlive;
     }
@@ -86,6 +99,7 @@ public class Menu implements Serializable {
     public void setKeepAlive(Boolean keepAlive) {
         this.keepAlive = keepAlive;
     }
+
     public Boolean getRequireAuth() {
         return requireAuth;
     }
@@ -93,6 +107,7 @@ public class Menu implements Serializable {
     public void setRequireAuth(Boolean requireAuth) {
         this.requireAuth = requireAuth;
     }
+
     public Long getParentId() {
         return parentId;
     }
@@ -100,6 +115,7 @@ public class Menu implements Serializable {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -108,19 +124,37 @@ public class Menu implements Serializable {
         this.enabled = enabled;
     }
 
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
-            "id=" + id +
-            ", url=" + url +
-            ", path=" + path +
-            ", component=" + component +
-            ", name=" + name +
-            ", iconCls=" + iconCls +
-            ", keepAlive=" + keepAlive +
-            ", requireAuth=" + requireAuth +
-            ", parentId=" + parentId +
-            ", enabled=" + enabled +
-        "}";
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", path='" + path + '\'' +
+                ", component='" + component + '\'' +
+                ", name='" + name + '\'' +
+                ", iconCls='" + iconCls + '\'' +
+                ", keepAlive=" + keepAlive +
+                ", requireAuth=" + requireAuth +
+                ", parentId=" + parentId +
+                ", enabled=" + enabled +
+                ", children=" + children +
+                ", roles=" + roles +
+                '}';
     }
 }

@@ -13,4 +13,6 @@ import com.pingsoft.mark.pojo.User;
  */
 public interface IUserService extends IService<User> {
 
+    User selectUserWithRolesByAccount(String account);
+
 }
