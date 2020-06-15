@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pingsoft.mark.web.mapper.UserMapper">
-
+<mapper namespace="com.pingsoft.mark.mapper.UserMapper">
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.pingsoft.mark.pojo.User">
-        <id column="id" property="id" />
-        <result column="discard" property="discard" />
-        <result column="create_time" property="create_time" />
-        <result column="account" property="account" />
-        <result column="password" property="password" />
-        <result column="username" property="username" />
-        <result column="last_login_time" property="last_login_time" />
-        <result column="telephone" property="telephone" />
-        <result column="enabled" property="enabled" />
-        <result column="userface" property="userface" />
+        <id column="id" property="id"/>
+        <result column="discard" property="discard"/>
+        <result column="create_time" property="create_time"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="username" property="username"/>
+        <result column="last_login_time" property="last_login_time"/>
+        <result column="telephone" property="telephone"/>
+        <result column="enabled" property="enabled"/>
+        <result column="userface" property="userface"/>
     </resultMap>
+
+    <resultMap id="UserWithRoles" type="com.pingsoft.mark.pojo.User" extends="BaseResultMap">
+        <collection property="roleList" ofType="com.pingsoft.mark.pojo.Role">
+            <id column="rid" property="id"></id>
+            <result column="rname" property="name"></result>
+            <result column="rnameZh" property="nameZh"></result>
+            <result column="rcreate_time" property="create_time"></result>
+            <result column="rdiscard" property="discard"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectUserWithRolesByAccount" resultMap="UserWithRoles">
+        select u.id
+             , u.account
+             , u.username
+             , u.photo
+             , u.enabled
+             , u.password
+             , r.id      as rid
+             , r.name    as rname
+             , r.nameZh  as rnameZh
+        from user u
+                 left join user_role ur on u.id = ur.uid
+                 left join role r on
+            ur.rid = r.id
+        where u.account = #{account}
+          and u.discard = '0'
+          and u.enabled = true
+    </select>
 
 </mapper>

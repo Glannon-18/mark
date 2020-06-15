@@ -6,6 +6,9 @@ import com.pingsoft.mark.pojo.Menu;
 import com.pingsoft.mark.sevice.IMenuService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  * 服务实现类
@@ -17,4 +20,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 
+    @Resource
+    private MenuMapper menuMapper;
+
+    @Override
+    public List<Menu> getAllMenusWithRole() {
+        return menuMapper.getAllMenusWithRole();
+    }
+
+    @Override
+    public List<Menu> getMenuSideBar(Long userId) {
+        return menuMapper.getMenuSideBar(userId);
+    }
 }
