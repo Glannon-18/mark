@@ -27,7 +27,7 @@
 
 
     <resultMap id="MenuSideBar" type="com.pingsoft.mark.pojo.Menu" extends="BaseResultMap">
-        <collection property="children" ofType="com.pingsoft.mark.pojo.Menu" select="selectChildren" column="id">
+        <collection property="children" ofType="com.pingsoft.mark.pojo.Menu">
             <id column="id2" property="id"/>
             <result column="url2" property="url"/>
             <result column="path2" property="path"/>
@@ -44,34 +44,26 @@
 
     <select id="getMenuSideBar" resultMap="MenuSideBar">
 SELECT DISTINCT
-	m2.*
+	m1.*,
+	m2.id as id2,
+	m2.path as path2,
+	m2.component as component2,
+	m2.name as name2,
+	m2.iconCls as iconCls2,
+	m2.keepAlive as keepAlive2,
+	m2.requireAuth as requireAuth2,
+	m2.parentId as parentId2,
+	m2.enabled as enabled2
 FROM
 	menu m1
 	LEFT JOIN menu m2 ON m1.id = m2.parentId
 	LEFT JOIN role_menu rm ON m2.id = rm.mid
-	LEFT JOIN user_role ur ON ur.rid = ur.rid
+	LEFT JOIN user_role ur ON ur.rid = rm.rid
 WHERE
-	ur.uid = #{userId} and m2.parentId=1
+	ur.uid = #{userId}
 ORDER BY
 	m1.`id`,
 	m2.`id`
-    </select>
-
-    <select id="selectChildren" resultMap="MenuSideBar">
-            SELECT
-	id AS id,
-	path AS path,
-	component AS component,
-	NAME AS name,
-	iconCls AS iconCls,
-	keepAlive AS keepAlive,
-	requireAuth AS requireAuth,
-	parentId AS parentId,
-	enabled AS enabled
-FROM
-	menu
-WHERE
-	parentId = #{id}
     </select>
 
 
