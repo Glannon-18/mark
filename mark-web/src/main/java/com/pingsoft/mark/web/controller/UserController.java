@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-06-12
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system/corpus/label")
 public class UserController {
 
 

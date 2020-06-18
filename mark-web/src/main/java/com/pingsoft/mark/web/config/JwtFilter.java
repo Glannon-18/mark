@@ -34,7 +34,7 @@ public class JwtFilter extends GenericFilterBean {
             resp.setContentType("application/json;charset=utf-8");
             resp.setStatus(401);
             PrintWriter out = resp.getWriter();
-            out.write(new ObjectMapper().writeValueAsString(RespBean.ok(respBean)));
+            out.write(new ObjectMapper().writeValueAsString(respBean));
             out.flush();
             out.close();
         } else {

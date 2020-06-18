@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -24,6 +26,10 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @Configuration
@@ -67,7 +73,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         })
                 .antMatchers(HttpMethod.POST, "/doLogin").permitAll()
                 .anyRequest().authenticated()
-                .and()
+                .and().exceptionHandling().accessDeniedHandler((request, response, accessDeniedException) -> {
+            response.setContentType("application/json;charset=utf-8");
+            response.setStatus(403);
+            PrintWriter out = response.getWriter();
+            out.write(new ObjectMapper().writeValueAsString(RespBean.ok(accessDeniedException.getMessage())));
+            out.flush();
+            out.close();
+        }).and()
                 .addFilterBefore(new JWTAuthenticationFilter("/doLogin", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
