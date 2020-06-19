@@ -6,7 +6,9 @@ import com.pingsoft.mark.pojo.User;
 import com.pingsoft.mark.web.Constant;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,6 +24,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 验证用户名密码正确后，生成一个token，并将token返回给客户端
@@ -37,9 +41,35 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse resp) throws AuthenticationException, IOException, ServletException {
-        User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
-        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+        if (!request.getMethod().equals("POST")) {
+            throw new AuthenticationServiceException(
+                    "Authentication method not supported: " + request.getMethod());
+        }
+        if (!(request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE))) {
+            throw new AuthenticationServiceException(
+                    "Authentication contentType not supported: " + request.getContentType());
+        }
+        Map<String, String> loginData = new HashMap<>();
+        try {
+            loginData = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+        if (username == null) {
+            username = "";
+        }
+        if (password == null) {
+            password = "";
+        }
+        username = username.trim();
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+                username, password);
+        setDetails(request, authRequest);
+        return this.getAuthenticationManager().authenticate(authRequest);
+
     }
 
     @Override
@@ -58,7 +88,9 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
                 .compact();
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
-        out.write(new ObjectMapper().writeValueAsString(RespBean.ok(jwt)));
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", jwt);
+        out.write(new ObjectMapper().writeValueAsString(RespBean.ok(tokenMap)));
         out.flush();
         out.close();
     }
@@ -70,4 +102,10 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
         out.flush();
         out.close();
     }
+
+    protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
+        authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
+    }
+
+
 }

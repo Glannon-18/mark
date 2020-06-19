@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RespBean {
-    private Integer status;
+    private Integer code;
     private String msg;
-    private Object obj;
+    private Object object;
 
     public static RespBean build() {
         return new RespBean();
@@ -16,12 +16,12 @@ public class RespBean {
         return new RespBean(200, msg, null);
     }
 
-    public static RespBean ok(String msg, Object obj) {
-        return new RespBean(200, msg, obj);
+    public static RespBean ok(String msg, Object tokenMap) {
+        return new RespBean(200, msg, tokenMap);
     }
 
-    public static RespBean ok(Object obj) {
-        return new RespBean(200, null, obj);
+    public static RespBean ok(Object tokenMap) {
+        return new RespBean(200, null, tokenMap);
     }
 
     public static RespBean ok() {
@@ -32,25 +32,25 @@ public class RespBean {
         return new RespBean(500, msg, null);
     }
 
-    public static RespBean error(String msg, Object obj) {
-        return new RespBean(500, msg, obj);
+    public static RespBean error(String msg, Object tokenMap) {
+        return new RespBean(500, msg, tokenMap);
     }
 
     private RespBean() {
     }
 
-    private RespBean(Integer status, String msg, Object obj) {
-        this.status = status;
+    private RespBean(Integer code, String msg, Object tokenMap) {
+        this.code = code;
         this.msg = msg;
-        this.obj = obj;
+        this.object = tokenMap;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCode() {
+        return code;
     }
 
-    public RespBean setStatus(Integer status) {
-        this.status = status;
+    public RespBean setCode(Integer code) {
+        this.code = code;
         return this;
     }
 
@@ -63,12 +63,12 @@ public class RespBean {
         return this;
     }
 
-    public Object getObj() {
-        return obj;
+    public Object getObject() {
+        return object;
     }
 
-    public RespBean setObj(Object obj) {
-        this.obj = obj;
+    public RespBean setObject(Object object) {
+        this.object = object;
         return this;
     }
 }
