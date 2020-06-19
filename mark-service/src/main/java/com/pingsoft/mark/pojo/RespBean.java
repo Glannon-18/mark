@@ -20,8 +20,8 @@ public class RespBean {
         return new RespBean(200, msg, tokenMap);
     }
 
-    public static RespBean ok(Object tokenMap) {
-        return new RespBean(200, null, tokenMap);
+    public static RespBean ok(Object object) {
+        return new RespBean(200, null, object);
     }
 
     public static RespBean ok() {
