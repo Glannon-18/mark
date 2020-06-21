@@ -75,12 +75,15 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse resp, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
+        StringBuffer as = new StringBuffer();
+        for (GrantedAuthority authority : authorities) {
+            as.append(authority.getAuthority())
+                    .append(",");
+        }
         User user = (User) authResult.getPrincipal();
-
-
         String jwt = Jwts.builder()
                 .claim("id", user.getId())
-                .claim("authorities", authorities)
+                .claim("authorities", as)
                 .setSubject(authResult.getName())
                 .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .signWith(SignatureAlgorithm.HS512, Constant.TOKEN_KEY)

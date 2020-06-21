@@ -10,13 +10,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @Configuration
@@ -57,8 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 object.setSecurityMetadataSource(customFilterInvocationSecurityMetadataSource);
                 return object;
             }
-        })
-                .antMatchers(HttpMethod.POST, "/doLogin").permitAll()
+        }).antMatchers(HttpMethod.POST, "/doLogin").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedHandler((request, response, accessDeniedException) -> {
             response.setContentType("application/json;charset=utf-8");
@@ -67,7 +72,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             out.write(new ObjectMapper().writeValueAsString(RespBean.ok(accessDeniedException.getMessage())));
             out.flush();
             out.close();
-        }).and()
+        }).and().logout().logoutUrl("/logout").logoutSuccessHandler((request, response, authentication) -> {
+            response.setContentType("application/json;charset=utf-8");
+            response.setStatus(200);
+            PrintWriter out = response.getWriter();
+            out.write(new ObjectMapper().writeValueAsString(RespBean.ok("注销成功")));
+            out.flush();
+            out.close();
+        }).permitAll().and()
                 .addFilterBefore(new JWTAuthenticationFilter("/doLogin", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
