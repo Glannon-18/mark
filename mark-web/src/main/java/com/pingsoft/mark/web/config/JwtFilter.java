@@ -3,6 +3,7 @@ package com.pingsoft.mark.web.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pingsoft.mark.pojo.RespBean;
+import com.pingsoft.mark.pojo.User;
 import com.pingsoft.mark.web.Constant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -10,27 +11,29 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class JwtFilter extends GenericFilterBean {
+
+public class JwtFilter extends OncePerRequestFilter {
+
+
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        HttpServletRequest req = (HttpServletRequest) request;
         String jwtToken = req.getHeader("authorization");
         if (ObjectUtils.isEmpty(jwtToken)) {
             RespBean respBean = RespBean.error("还未登陆！");
-            HttpServletResponse resp = (HttpServletResponse) servletResponse;
+            HttpServletResponse resp = (HttpServletResponse) response;
             resp.setContentType("application/json;charset=utf-8");
             resp.setStatus(401);
             PrintWriter out = resp.getWriter();
@@ -40,11 +43,17 @@ public class JwtFilter extends GenericFilterBean {
         } else {
             Claims claims = Jwts.parser().setSigningKey(Constant.TOKEN_KEY).parseClaimsJws(jwtToken.replace("Bearer", ""))
                     .getBody();
-            String username = claims.getSubject();//获取当前登录用户名
+
+            //获取当前登录用户名
+//            String username = claims.getSubject();
+            User user = new User();
+            user.setId(Long.valueOf(claims.get("userId").toString()));
+            user.setAccount(claims.get("account").toString());
+            user.setUsername(claims.get("username").toString());
             List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList((String) claims.get("authorities"));
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(token);
-            filterChain.doFilter(req, servletResponse);
+            filterChain.doFilter(req, response);
         }
     }
 }

@@ -82,7 +82,9 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
         }
         User user = (User) authResult.getPrincipal();
         String jwt = Jwts.builder()
-                .claim("id", user.getId())
+                .claim("userId", user.getId())
+                .claim("account", user.getAccount())
+                .claim("username", user.getUsername())
                 .claim("authorities", as)
                 .setSubject(authResult.getName())
                 .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))

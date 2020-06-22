@@ -9,6 +9,7 @@
         <result column="path" property="path"/>
         <result column="component" property="component"/>
         <result column="name" property="name"/>
+        <result column="title" property="title"/>
         <result column="iconCls" property="iconCls"/>
         <result column="keepAlive" property="keepAlive"/>
         <result column="requireAuth" property="requireAuth"/>

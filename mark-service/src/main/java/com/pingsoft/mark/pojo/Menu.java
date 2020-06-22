@@ -14,7 +14,7 @@ import java.util.List;
  * @author wkw
  * @since 2020-06-12
  */
-public class Menu implements Serializable {
+public class Menu implements Serializable, Comparable<Menu> {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +28,8 @@ public class Menu implements Serializable {
     private String component;
 
     private String name;
+
+    private String title;
 
     private String iconCls;
 
@@ -140,6 +142,14 @@ public class Menu implements Serializable {
         this.roles = roles;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
@@ -156,5 +166,11 @@ public class Menu implements Serializable {
                 ", children=" + children +
                 ", roles=" + roles +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Menu o) {
+        return (int) (this.getId() - o.getId());
     }
 }
