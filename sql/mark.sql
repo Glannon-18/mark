@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2020-06-15 17:01:15
+Date: 2020-06-22 17:38:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,7 @@ CREATE TABLE `menu` (
   `url` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `path` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `component` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `iconCls` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `keepAlive` tinyint(1) DEFAULT NULL,
@@ -38,21 +39,21 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', '/', null, null, '所有', null, null, null, null, '1');
-INSERT INTO `menu` VALUES ('2', '/', '/home', 'Home', '我的工作', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('3', '/', '/home', 'Home', '组长工作', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('4', '/', '/home', 'Home', '经理工作', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('5', '/', '/home', 'Home', '系统管理', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('6', '/personal/upload_corpus/**', '/personnal/upload_corpus', 'Upload_corpus', '上传语料', null, null, '1', '2', '1');
-INSERT INTO `menu` VALUES ('7', '/personal/statistics/**', '/personnal/statistics', 'Statistics', '我的统计', null, null, '1', '2', '1');
-INSERT INTO `menu` VALUES ('8', '/leader/publish/**', '/leader/publish', 'Publish', '发布项目', null, null, '1', '3', '1');
-INSERT INTO `menu` VALUES ('9', '/leader/chexk/**', '/leader/check', 'Leader_check', '初步审核', null, null, '1', '3', '1');
-INSERT INTO `menu` VALUES ('10', '/manager/chexk/**', '/manager/check', 'Manager_check', '最终审核', null, null, '1', '4', '1');
-INSERT INTO `menu` VALUES ('11', '/system/user/**', '/system/user', 'System_user', '用户管理', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('12', '/system/permission/**', '/system/permission', 'System_permission', '角色权限管理', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('14', '/system/corpus/team/**', '/system/corpus/team', 'System_team', '小组管理', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('15', '/system/corpus/type/**', '/system/corpus/type', 'System_type', '语料类型管理', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('16', '/system/corpus/label/**', '/system/corpus/label', 'System_label', '标注管理', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('1', '/', null, null, '所有', null, null, null, null, null, '1');
+INSERT INTO `menu` VALUES ('2', '/', '/personnal', 'Layout', '我的工作', 'my_work', null, null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('3', '/', '/leader', 'Layout', '组长工作', 'leader_work', null, null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('4', '/', '/manager', 'Layout', '经理工作', 'manager_work', null, null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('5', '/', '/system', 'Layout', '系统管理', 'system_management', null, null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('6', '/personal/upload_corpus/**', '/personnal/upload_corpus', 'Upload_corpus', '上传语料', 'upload_corpus', null, null, '1', '2', '1');
+INSERT INTO `menu` VALUES ('7', '/personal/statistics/**', '/personnal/statistics', 'Statistics', '我的统计', 'statistics', null, null, '1', '2', '1');
+INSERT INTO `menu` VALUES ('8', '/leader/publish/**', '/leader/publish', 'Publish', '发布项目', 'publish', null, null, '1', '3', '1');
+INSERT INTO `menu` VALUES ('9', '/leader/chexk/**', '/leader/check', 'Leader_check', '初步审核', 'leader_check', null, null, '1', '3', '1');
+INSERT INTO `menu` VALUES ('10', '/manager/chexk/**', '/manager/check', 'Manager_check', '最终审核', 'manager_check', null, null, '1', '4', '1');
+INSERT INTO `menu` VALUES ('11', '/system/user/**', '/system/user', 'System_user', '用户管理', 'system_user', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('12', '/system/permission/**', '/system/permission', 'System_permission', '角色权限管理', 'system_permission', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('14', '/system/corpus/team/**', '/system/corpus/team', 'System_team', '小组管理', 'system_team', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('15', '/system/corpus/type/**', '/system/corpus/type', 'System_type', '语料类型管理', 'system_type', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('16', '/system/corpus/label/**', '/system/corpus/label', 'System_label', '标注管理', 'system_label', null, null, '1', '5', '1');
 
 -- ----------------------------
 -- Table structure for role
@@ -101,7 +102,7 @@ INSERT INTO `role_menu` VALUES ('6', '1', '11');
 INSERT INTO `role_menu` VALUES ('7', '1', '12');
 INSERT INTO `role_menu` VALUES ('8', '1', '14');
 INSERT INTO `role_menu` VALUES ('9', '1', '15');
-INSERT INTO `role_menu` VALUES ('10', '1', '16');
+INSERT INTO `role_menu` VALUES ('10', '2', '16');
 
 -- ----------------------------
 -- Table structure for user
@@ -124,7 +125,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '我的账号', null, '17787877878', '', null);
+INSERT INTO `user` VALUES ('1', '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '习近平', null, '17787877878', '', null);
 
 -- ----------------------------
 -- Table structure for user_role
@@ -145,5 +146,4 @@ CREATE TABLE `user_role` (
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES ('1', '1', '1');
-INSERT INTO `user_role` VALUES ('2', '1', '2');
 INSERT INTO `user_role` VALUES ('3', '1', '3');
