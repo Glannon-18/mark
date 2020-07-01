@@ -33,8 +33,8 @@
             <result column="url2" property="url"/>
             <result column="path2" property="path"/>
             <result column="component2" property="component"/>
-            <result column="name2" property="name"/>
             <result column="title2" property="title"/>
+            <result column="name2" property="name"/>
             <result column="iconCls2" property="iconCls"/>
             <result column="keepAlive2" property="keepAlive"/>
             <result column="requireAuth2" property="requireAuth"/>
@@ -50,7 +50,7 @@ SELECT DISTINCT
 	m2.id as id2,
 	m2.path as path2,
 	m2.component as component2,
-	m2.title as title2,
+    m2.title as title2,
 	m2.name as name2,
 	m2.iconCls as iconCls2,
 	m2.keepAlive as keepAlive2,
