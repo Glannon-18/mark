@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2020-06-22 17:38:01
+Date: 2020-07-03 17:41:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,20 +40,20 @@ CREATE TABLE `menu` (
 -- Records of menu
 -- ----------------------------
 INSERT INTO `menu` VALUES ('1', '/', null, null, '所有', null, null, null, null, null, '1');
-INSERT INTO `menu` VALUES ('2', '/', '/personnal', 'Layout', '我的工作', 'my_work', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('3', '/', '/leader', 'Layout', '组长工作', 'leader_work', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('4', '/', '/manager', 'Layout', '经理工作', 'manager_work', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('5', '/', '/system', 'Layout', '系统管理', 'system_management', null, null, '1', '1', '1');
-INSERT INTO `menu` VALUES ('6', '/personal/upload_corpus/**', '/personnal/upload_corpus', 'Upload_corpus', '上传语料', 'upload_corpus', null, null, '1', '2', '1');
-INSERT INTO `menu` VALUES ('7', '/personal/statistics/**', '/personnal/statistics', 'Statistics', '我的统计', 'statistics', null, null, '1', '2', '1');
-INSERT INTO `menu` VALUES ('8', '/leader/publish/**', '/leader/publish', 'Publish', '发布项目', 'publish', null, null, '1', '3', '1');
-INSERT INTO `menu` VALUES ('9', '/leader/chexk/**', '/leader/check', 'Leader_check', '初步审核', 'leader_check', null, null, '1', '3', '1');
-INSERT INTO `menu` VALUES ('10', '/manager/chexk/**', '/manager/check', 'Manager_check', '最终审核', 'manager_check', null, null, '1', '4', '1');
-INSERT INTO `menu` VALUES ('11', '/system/user/**', '/system/user', 'System_user', '用户管理', 'system_user', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('12', '/system/permission/**', '/system/permission', 'System_permission', '角色权限管理', 'system_permission', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('14', '/system/corpus/team/**', '/system/corpus/team', 'System_team', '小组管理', 'system_team', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('15', '/system/corpus/type/**', '/system/corpus/type', 'System_type', '语料类型管理', 'system_type', null, null, '1', '5', '1');
-INSERT INTO `menu` VALUES ('16', '/system/corpus/label/**', '/system/corpus/label', 'System_label', '标注管理', 'system_label', null, null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('2', '/', '/personnal', 'Layout', '我的工作', 'my_work', 'dashboard', null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('3', '/', '/leader', 'Layout', '组长工作', 'leader_work', 'dashboard', null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('4', '/', '/manager', 'Layout', '经理工作', 'manager_work', 'dashboard', null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('5', '/', '/system', 'Layout', '系统管理', 'system_management', 'dashboard', null, '1', '1', '1');
+INSERT INTO `menu` VALUES ('6', '/personal/upload_corpus/**', '/personnal/upload_corpus', 'Upload_corpus', '上传语料', 'upload_corpus', 'dashboard', null, '1', '2', '1');
+INSERT INTO `menu` VALUES ('7', '/personal/statistics/**', '/personnal/statistics', 'Statistics', '我的统计', 'statistics', 'dashboard', null, '1', '2', '1');
+INSERT INTO `menu` VALUES ('8', '/leader/publish/**', '/leader/publish', 'Publish', '发布项目', 'publish', 'dashboard', null, '1', '3', '1');
+INSERT INTO `menu` VALUES ('9', '/leader/chexk/**', '/leader/check', 'Leader_check', '初步审核', 'leader_check', 'dashboard', null, '1', '3', '1');
+INSERT INTO `menu` VALUES ('10', '/manager/chexk/**', '/manager/check', 'Manager_check', '最终审核', 'manager_check', 'dashboard', null, '1', '4', '1');
+INSERT INTO `menu` VALUES ('11', '/system/user/**', '/system/user', 'System_user', '用户管理', 'system_user', 'dashboard', null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('12', '/system/permission/**', '/system/permission', 'System_permission', '角色权限管理', 'system_permission', 'dashboard', null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('14', '/system/team/**', '/system/team', 'System_team', '小组管理', 'system_team', 'dashboard', null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('15', '/system/type/**', '/system/type', 'System_type', '语料类型管理', 'system_type', 'dashboard', null, '1', '5', '1');
+INSERT INTO `menu` VALUES ('16', '/system/label/**', '/system/label', 'System_label', '标注管理', 'system_label', 'dashboard', null, '1', '5', '1');
 
 -- ----------------------------
 -- Table structure for role
