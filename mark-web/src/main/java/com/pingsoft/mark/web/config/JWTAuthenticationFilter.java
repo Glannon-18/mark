@@ -1,9 +1,9 @@
 package com.pingsoft.mark.web.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.User;
-import com.pingsoft.mark.web.Constant;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.MediaType;

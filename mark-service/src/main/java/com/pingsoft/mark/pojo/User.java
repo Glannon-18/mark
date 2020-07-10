@@ -3,6 +3,7 @@ package com.pingsoft.mark.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,6 +33,7 @@ public class User implements Serializable, UserDetails {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @TableLogic(value = "0", delval = "1")
     private String discard;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -43,6 +45,7 @@ public class User implements Serializable, UserDetails {
 
     private String username;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime last_login_time;
 
     private String telephone;
@@ -180,15 +183,16 @@ public class User implements Serializable, UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", discard=" + discard +
+                ", discard='" + discard + '\'' +
                 ", create_time=" + create_time +
-                ", account=" + account +
-                ", password=" + password +
-                ", username=" + username +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
                 ", last_login_time=" + last_login_time +
-                ", telephone=" + telephone +
+                ", telephone='" + telephone + '\'' +
                 ", enabled=" + enabled +
-                ", userface=" + photo +
-                "}";
+                ", photo='" + photo + '\'' +
+                ", roleList=" + roleList +
+                '}';
     }
 }

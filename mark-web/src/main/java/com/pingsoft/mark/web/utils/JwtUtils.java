@@ -6,8 +6,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.security.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,21 +110,6 @@ public class JwtUtils {
     public static boolean isExpiration(String token) {
         Claims claims = Jwts.parser().setSigningKey(APPSECRET_KEY).parseClaimsJws(token).getBody();
         return claims.getExpiration().before(new Date());
-    }
-
-    public static void main(String[] args) {
-        String name = "acong";
-        String role = "rol";
-        String token = createToken(name, role);
-        System.out.println(token);
-
-        Claims claims = checkJWT(token);
-        System.out.println(claims.get("username"));
-
-        System.out.println(getUsername(token));
-        System.out.println(getUserRole(token));
-        System.out.println(isExpiration(token));
-
     }
 
 
