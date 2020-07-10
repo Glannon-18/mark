@@ -1,13 +1,16 @@
 package com.pingsoft.mark.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pingsoft.mark.Constant;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -25,7 +28,7 @@ public class Role implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableLogic(value = "0", delval = "1")
+    @TableLogic(value = Constant.NOT_DELETE, delval = Constant.DELETE)
     private String discard;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -34,6 +37,9 @@ public class Role implements Serializable {
     private String name;
 
     private String nameZh;
+
+    @TableField(exist = false)
+    private List<Menu> menuList;
 
     public Long getId() {
         return id;
@@ -75,14 +81,22 @@ public class Role implements Serializable {
         this.nameZh = nameZh;
     }
 
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
+
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", discard=" + discard +
+                ", discard='" + discard + '\'' +
                 ", create_time=" + create_time +
-                ", name=" + name +
-                ", nameZh=" + nameZh +
-                "}";
+                ", name='" + name + '\'' +
+                ", nameZh='" + nameZh + '\'' +
+                '}';
     }
 }

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pingsoft.mark.Constant;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +34,7 @@ public class User implements Serializable, UserDetails {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableLogic(value = "0", delval = "1")
+    @TableLogic(value = Constant.NOT_DELETE, delval = Constant.DELETE)
     private String discard;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

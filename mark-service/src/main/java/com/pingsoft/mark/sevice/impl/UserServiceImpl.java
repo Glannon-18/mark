@@ -81,12 +81,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         getBaseMapper().insert(user);
 
         if (!roles.isEmpty()) {
-            Long userid = user.getId();
+            Long userId = user.getId();
             List<User_role> user_roleList = new ArrayList<>();
             roles.stream().forEach(r -> {
                 User_role ur = new User_role();
                 ur.setRid(Long.valueOf(r));
-                ur.setUid(userid);
+                ur.setUid(userId);
                 user_roleList.add(ur);
             });
             user_roleService.saveBatch(user_roleList);
@@ -95,6 +95,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(String id, JSONObject jsonObject) {
         String account = jsonObject.getString("account");
         String username = jsonObject.getString("username");

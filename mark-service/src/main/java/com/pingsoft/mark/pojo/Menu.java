@@ -1,6 +1,7 @@
 package com.pingsoft.mark.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
@@ -41,10 +42,11 @@ public class Menu implements Serializable, Comparable<Menu> {
 
     private Boolean enabled;
 
+    @TableField(exist = false)
     private List<Menu> children;
 
+    @TableField(exist = false)
     private List<Role> roles;
-
 
     public Long getId() {
         return id;

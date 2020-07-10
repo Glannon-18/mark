@@ -4,11 +4,28 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.pingsoft.mark.pojo.Role">
-        <id column="id" property="id" />
-        <result column="discard" property="discard" />
-        <result column="create_time" property="create_time" />
-        <result column="name" property="name" />
-        <result column="nameZh" property="nameZh" />
+        <id column="id" property="id"/>
+        <result column="discard" property="discard"/>
+        <result column="create_time" property="create_time"/>
+        <result column="name" property="name"/>
+        <result column="nameZh" property="nameZh"/>
     </resultMap>
+
+    <resultMap id="withMenus" type="com.pingsoft.mark.pojo.Role" extends="BaseResultMap">
+        <collection property="menuList" ofType="com.pingsoft.mark.pojo.Menu">
+            <id column="mid" property="id"></id>
+            <result column="mtitle" property="title"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectById" resultMap="withMenus">
+        select r.*, m.id as mid, m.title as mtitle
+        from role r
+                 left join role_menu rm on rm.rid = r.id
+                 left join
+             menu m on rm.mid = m.id
+        where r.id = #{id}
+    </select>
 
 </mapper>
