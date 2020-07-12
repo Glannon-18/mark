@@ -69,10 +69,8 @@ ORDER BY
 	m2.`id`
     </select>
 
-
     <select id="getAllMenusWithRole" resultMap="MenuWithRole">
         select m.*,r.id as rid,r.name as rname ,r.nameZh as rnameZh from Menu m right join role_menu rm on rm.mid=m.id left join role r on rm.rid=r.id
     </select>
-
 
 </mapper>
