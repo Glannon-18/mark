@@ -11,3 +11,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: off
   mapper-locations: classpath:com/pingsoft/mark/mapper/*.xml
+
+system:
+  upload:
+    temp_dir: d:\\temp
