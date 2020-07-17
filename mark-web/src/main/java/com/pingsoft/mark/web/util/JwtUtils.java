@@ -1,4 +1,4 @@
-package com.pingsoft.mark.web.utils;
+package com.pingsoft.mark.web.util;
 
 
 import com.pingsoft.mark.pojo.User;

@@ -14,4 +14,4 @@ mybatis-plus:
 
 system:
   upload:
-    temp_dir: d:\\temp
+    temp_dir: d:\\temp\\

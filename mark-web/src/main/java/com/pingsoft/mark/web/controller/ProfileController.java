@@ -1,16 +1,20 @@
 package com.pingsoft.mark.web.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.pingsoft.mark.pojo.RespBean;
+import com.pingsoft.mark.pojo.User;
 import com.pingsoft.mark.sevice.IUserService;
+import com.pingsoft.mark.web.util.Base64;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
@@ -25,7 +29,14 @@ public class ProfileController {
     private IUserService userService;
 
 
-    @PostMapping("upload_img")
+    @GetMapping("/info")
+    public RespBean info() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User u = userService.selectById(user.getId());
+        return RespBean.ok(u);
+    }
+
+    @PostMapping("/upload_img")
     public RespBean upload_img(MultipartFile file) throws IOException {
         String extend = file.getOriginalFilename().split("\\.")[1];
         String upload_name = UUID.randomUUID().toString() + "." + extend;
@@ -36,6 +47,20 @@ public class ProfileController {
         }
         file.transferTo(upload_file);
         return RespBean.ok(upload_name);
+    }
+
+    @PostMapping("/setAvatar")
+    public RespBean setAvatar(@RequestBody JSONObject data) {
+        String name = UUID.randomUUID().toString() + ".jpg";
+        String filePath = temp_dir;
+        Base64.convertBase64ToFile(data.getString("base64"), filePath, name);
+        HashMap<String, String> result = new HashMap<>();
+        result.put("name", name);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.set("photo", name).eq("id", user.getId());
+        userService.update(userUpdateWrapper);
+        return RespBean.ok(result);
     }
 
 }

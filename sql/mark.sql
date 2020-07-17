@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2020-07-10 17:34:25
+Date: 2020-07-17 17:59:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,7 +125,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '习近平', null, '17787877878', '', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
+INSERT INTO `user` VALUES ('1', '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '习近平', null, '17787877878', '', '3b7ab01b-ca85-4582-bce7-0170ddfac4c5.jpg');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -146,4 +146,5 @@ CREATE TABLE `user_role` (
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES ('1', '1', '1');
-INSERT INTO `user_role` VALUES ('3', '1', '3');
+INSERT INTO `user_role` VALUES ('2', '1', '3');
+INSERT INTO `user_role` VALUES ('3', '1', '2');

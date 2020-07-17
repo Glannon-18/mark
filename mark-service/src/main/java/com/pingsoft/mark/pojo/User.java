@@ -42,6 +42,7 @@ public class User implements Serializable, UserDetails {
 
     private String account;
 
+    @JsonIgnore
     private String password;
 
     private String username;

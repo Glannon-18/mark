@@ -28,11 +28,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletRequest req = request;
         String jwtToken = req.getHeader("authorization");
         if (ObjectUtils.isEmpty(jwtToken)) {
             RespBean respBean = RespBean.error("还未登陆！");
-            HttpServletResponse resp = (HttpServletResponse) response;
+            HttpServletResponse resp = response;
             resp.setContentType("application/json;charset=utf-8");
             resp.setStatus(401);
             PrintWriter out = resp.getWriter();
