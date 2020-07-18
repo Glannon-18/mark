@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -53,6 +54,12 @@ public class RoleController {
     public RespPageBean page(@RequestParam Integer currentPage) {
         IPage<Role> page = roleService.page(currentPage);
         return new RespPageBean(page.getTotal(), page.getRecords(), page.getCurrent());
+    }
+
+    @GetMapping("/userId/{userId}")
+    public RespBean selectByUserId(@PathVariable Long userId) {
+        List<Role> roles = roleService.selectByUserId(userId);
+        return RespBean.ok(roles);
     }
 
 }

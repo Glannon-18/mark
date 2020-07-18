@@ -2,6 +2,7 @@ package com.pingsoft.mark.web;
 
 import com.pingsoft.mark.pojo.Menu;
 import com.pingsoft.mark.sevice.IMenuService;
+import com.pingsoft.mark.sevice.IRoleService;
 import com.pingsoft.mark.sevice.IUserService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ class MarkWebApplicationTests {
 
     @Resource
     private IMenuService iMenuService;
+
+    @Resource
+    private IRoleService roleService;
 
     @Test
     void contextLoads() {
@@ -50,6 +54,11 @@ class MarkWebApplicationTests {
         List<Menu> menuList = iMenuService.getMenuSideBar(1l);
         LOGGER.info(menuList.toString());
 
+    }
+
+    @Test
+    void test4(){
+        roleService.selectByUserId(1l);
     }
 }
 

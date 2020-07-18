@@ -17,6 +17,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -80,5 +81,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public Role selectById(Long id) {
         return getBaseMapper().selectById(id);
+    }
+
+    @Override
+    public List<Role> selectByUserId(Long userId) {
+        return getBaseMapper().selectByUserId(userId);
     }
 }

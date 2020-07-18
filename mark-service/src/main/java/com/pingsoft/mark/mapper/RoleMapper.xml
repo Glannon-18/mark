@@ -28,4 +28,9 @@
         where r.id = #{id}
     </select>
 
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select * from role r left join user_role ur on r.id=ur.rid left join user u on u.id =ur.uid
+        where u.id=#{userId}
+    </select>
+
 </mapper>

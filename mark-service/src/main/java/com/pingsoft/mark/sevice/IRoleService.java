@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pingsoft.mark.pojo.Role;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -22,4 +24,6 @@ public interface IRoleService extends IService<Role> {
     IPage<Role> page(Integer currentPage);
 
     Role selectById(Long id);
+
+    List<Role> selectByUserId(Long userId);
 }
