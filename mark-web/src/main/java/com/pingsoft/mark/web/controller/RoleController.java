@@ -2,7 +2,9 @@ package com.pingsoft.mark.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
 import com.pingsoft.mark.pojo.Role;
@@ -22,7 +24,7 @@ import java.util.List;
  * @author wkw
  * @since 2020-06-12
  */
-@Controller
+@RestController
 @RequestMapping("/role")
 public class RoleController {
 
@@ -59,6 +61,14 @@ public class RoleController {
     @GetMapping("/userId/{userId}")
     public RespBean selectByUserId(@PathVariable Long userId) {
         List<Role> roles = roleService.selectByUserId(userId);
+        return RespBean.ok(roles);
+    }
+
+    @GetMapping("/selectAll")
+    public RespBean selectAll() {
+        QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
+        roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
+        List<Role> roles = roleService.getBaseMapper().selectList(roleQueryWrapper);
         return RespBean.ok(roles);
     }
 
