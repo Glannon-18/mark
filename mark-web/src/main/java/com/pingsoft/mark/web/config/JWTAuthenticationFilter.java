@@ -87,7 +87,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
                 .claim("username", user.getUsername())
                 .claim("authorities", as)
                 .setSubject(authResult.getName())
-                .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
                 .signWith(SignatureAlgorithm.HS512, Constant.TOKEN_KEY)
                 .compact();
         resp.setContentType("application/json;charset=utf-8");
