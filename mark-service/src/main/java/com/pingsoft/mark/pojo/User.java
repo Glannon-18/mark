@@ -52,7 +52,8 @@ public class User implements Serializable, UserDetails {
 
     private String telephone;
 
-    private Boolean enabled;
+    @TableField(value = "enabled")
+    private Boolean usable;
 
     private String photo;
 
@@ -166,11 +167,11 @@ public class User implements Serializable, UserDetails {
     }
 
     public Boolean getEnabled() {
-        return enabled;
+        return usable;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setUsable(Boolean usable) {
+        this.usable = usable;
     }
 
     public String getPhoto() {
@@ -192,7 +193,7 @@ public class User implements Serializable, UserDetails {
                 ", username='" + username + '\'' +
                 ", last_login_time=" + last_login_time +
                 ", telephone='" + telephone + '\'' +
-                ", enabled=" + enabled +
+                ", enabled=" + usable +
                 ", photo='" + photo + '\'' +
                 ", roleList=" + roleList +
                 '}';

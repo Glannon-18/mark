@@ -11,7 +11,7 @@
         <result column="username" property="username"/>
         <result column="last_login_time" property="last_login_time"/>
         <result column="telephone" property="telephone"/>
-        <result column="enabled" property="enabled"/>
+        <result column="enabled" property="usable"/>
         <result column="userface" property="userface"/>
     </resultMap>
 
@@ -48,7 +48,7 @@
              , u.userface
              , u.last_login_time
              , u.telephone
-             , u.enabled     as enabled
+             , u.enabled
              , r.id          as rid
              , r.name        as rname
              , r.nameZh      as rnameZh
@@ -93,7 +93,7 @@
     <select id="selectCountByAccount" resultType="integer">
         select COUNT(*) from user where account=#{account}
         <trim prefix="and" prefixOverrides="and">
-            <if test="userId!=null">
+            <if test="userId!=null and userId!=''">
                 and id!=#{userid}
             </if>
         </trim>

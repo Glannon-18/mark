@@ -75,7 +75,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public IPage<Role> page(Integer currentPage) {
         Page page = new Page(currentPage, Constant.PAGE_SIZE);
-        return page(page);
+        QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
+        roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
+        return page(page, roleQueryWrapper);
     }
 
     @Override

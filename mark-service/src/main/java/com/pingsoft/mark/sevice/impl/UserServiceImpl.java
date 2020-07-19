@@ -69,12 +69,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String username = jsonObject.getString("username");
         String phone = jsonObject.getString("phone");
         String password = jsonObject.getString("password");
-        ArrayList<Integer> roles = (ArrayList<Integer>) jsonObject.get("roles");
+        Boolean available = jsonObject.getBoolean("available");
+        ArrayList<Integer> roles = (ArrayList<Integer>) jsonObject.get("rolesList");
         User user = new User();
         user.setAccount(account.trim());
         user.setCreate_time(LocalDateTime.now());
         user.setDiscard(Constant.NOT_DELETE);
-        user.setEnabled(true);
+        user.setUsable(available);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setTelephone(phone);
         user.setUsername(username);
