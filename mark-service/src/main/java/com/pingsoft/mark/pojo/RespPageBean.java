@@ -6,6 +6,7 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RespPageBean {
+    private Integer code=200;
     private Long total;
     private List<?> data;
     private Long pageSize;
@@ -39,5 +40,9 @@ public class RespPageBean {
 
     public void setPageSize(Long pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Integer getCode() {
+        return code;
     }
 }

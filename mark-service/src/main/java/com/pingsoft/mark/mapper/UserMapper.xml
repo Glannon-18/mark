@@ -12,7 +12,7 @@
         <result column="last_login_time" property="last_login_time"/>
         <result column="telephone" property="telephone"/>
         <result column="enabled" property="usable"/>
-        <result column="userface" property="userface"/>
+        <result column="photo" property="photo"/>
     </resultMap>
 
     <resultMap id="UserWithRoles" type="com.pingsoft.mark.pojo.User" extends="BaseResultMap">
@@ -45,7 +45,7 @@
              , u.account
              , u.password
              , u.username
-             , u.userface
+             , u.photo
              , u.last_login_time
              , u.telephone
              , u.enabled
@@ -94,7 +94,7 @@
         select COUNT(*) from user where account=#{account}
         <trim prefix="and" prefixOverrides="and">
             <if test="userId!=null and userId!=''">
-                and id!=#{userid}
+                and id!=#{userId}
             </if>
         </trim>
     </select>

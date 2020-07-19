@@ -174,6 +174,10 @@ public class User implements Serializable, UserDetails {
         this.usable = usable;
     }
 
+    public Boolean getUsable() {
+        return usable;
+    }
+
     public String getPhoto() {
         return photo;
     }

@@ -42,8 +42,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User selectById(Long id) {
-
-
         return getBaseMapper().selectById(id);
     }
 
@@ -102,10 +100,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String username = jsonObject.getString("username");
         String phone = jsonObject.getString("phone");
         String password = jsonObject.getString("password");
-        ArrayList<Integer> roles = (ArrayList<Integer>) jsonObject.get("roles");
+        Boolean available = jsonObject.getBoolean("available");
+        ArrayList<Integer> roles = (ArrayList<Integer>) jsonObject.get("rolesList");
 
         UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
-        userUpdateWrapper.set("account", account.trim()).set("username", username).set("telephone", phone)
+        userUpdateWrapper.set("account", account.trim()).set("username", username).set("telephone", phone).set("enabled", available)
                 .eq("id", Long.valueOf(id));
         if (!StringUtils.isEmpty(password)) {
             userUpdateWrapper.set("password", new BCryptPasswordEncoder().encode(password));
