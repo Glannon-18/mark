@@ -21,7 +21,7 @@ public interface IRoleService extends IService<Role> {
 
     void deleteById(Long id);
 
-    IPage<Role> page(Integer currentPage);
+    IPage<Role> page(Integer currentPage,String name);
 
     Role selectById(Long id);
 

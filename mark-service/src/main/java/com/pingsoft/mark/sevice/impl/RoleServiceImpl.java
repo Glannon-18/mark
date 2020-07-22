@@ -14,6 +14,7 @@ import com.pingsoft.mark.sevice.IRole_menuService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -73,10 +74,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public IPage<Role> page(Integer currentPage) {
+    public IPage<Role> page(Integer currentPage, String name) {
         Page page = new Page(currentPage, Constant.PAGE_SIZE);
         QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
         roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
+        if (!StringUtils.isEmpty(name)) {
+            roleQueryWrapper.like("nameZh", name);
+        }
         return page(page, roleQueryWrapper);
     }
 

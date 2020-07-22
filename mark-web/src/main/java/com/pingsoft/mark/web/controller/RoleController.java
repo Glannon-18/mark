@@ -11,8 +11,6 @@ import com.pingsoft.mark.pojo.Role;
 import com.pingsoft.mark.sevice.IRoleService;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -53,9 +51,9 @@ public class RoleController {
     }
 
     @GetMapping("/")
-    public RespPageBean page(@RequestParam Integer currentPage) {
-        IPage<Role> page = roleService.page(currentPage);
-        return new RespPageBean(page.getTotal(), page.getRecords(), page.getCurrent());
+    public RespPageBean page(@RequestParam Integer currentPage, @RequestParam String name) {
+        IPage<Role> page = roleService.page(currentPage, name);
+        return new RespPageBean(page.getTotal(), page.getRecords(), page.getSize());
     }
 
     @GetMapping("/userId/{userId}")
