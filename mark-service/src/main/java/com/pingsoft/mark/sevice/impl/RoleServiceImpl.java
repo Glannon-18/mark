@@ -17,6 +17,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
             role = new Role();
             role.setName(name);
             role.setNameZh(nameZh);
+            role.setCreate_time(LocalDateTime.now());
+            role.setDiscard(Constant.NOT_DELETE);
             save(role);
         }
         if (!ObjectUtils.isEmpty(menus)) {
