@@ -5,9 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pingsoft.mark.Constant;
+import com.pingsoft.mark.pojo.Menu;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
 import com.pingsoft.mark.pojo.Role;
+import com.pingsoft.mark.sevice.IMenuService;
 import com.pingsoft.mark.sevice.IRoleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,9 @@ public class RoleController {
 
     @Resource
     private IRoleService roleService;
+
+    @Resource
+    private IMenuService menuService;
 
 
     @RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.PUT})
@@ -68,6 +73,12 @@ public class RoleController {
         roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
         List<Role> roles = roleService.getBaseMapper().selectList(roleQueryWrapper);
         return RespBean.ok(roles);
+    }
+
+    @GetMapping("/getMenuTree")
+    public RespBean getMenuTree() {
+        List<Menu> menuTree = menuService.getMenuTree();
+        return RespBean.ok(menuTree);
     }
 
 }
