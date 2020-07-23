@@ -20,4 +20,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
 
     List<Menu> getMenuSideBar(@Param("userId") Long userId);
 
+    List<Menu> getMenuTree();
+
 }

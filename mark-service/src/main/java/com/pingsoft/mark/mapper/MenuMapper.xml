@@ -45,32 +45,57 @@
 
 
     <select id="getMenuSideBar" resultMap="MenuSideBar">
-SELECT DISTINCT
-	m1.*,
-	m2.id as id2,
-	m2.path as path2,
-	m2.component as component2,
-    m2.title as title2,
-	m2.name as name2,
-	m2.iconCls as iconCls2,
-	m2.keepAlive as keepAlive2,
-	m2.requireAuth as requireAuth2,
-	m2.parentId as parentId2,
-	m2.enabled as enabled2
-FROM
-	menu m1
-	LEFT JOIN menu m2 ON m1.id = m2.parentId
-	LEFT JOIN role_menu rm ON m2.id = rm.mid
-	LEFT JOIN user_role ur ON ur.rid = rm.rid
-WHERE
-	ur.uid = #{userId}
-ORDER BY
-	m1.`id`,
-	m2.`id`
+        SELECT DISTINCT
+        m1.*,
+        m2.id as id2,
+        m2.path as path2,
+        m2.component as component2,
+        m2.title as title2,
+        m2.name as name2,
+        m2.iconCls as iconCls2,
+        m2.keepAlive as keepAlive2,
+        m2.requireAuth as requireAuth2,
+        m2.parentId as parentId2,
+        m2.enabled as enabled2
+        FROM
+        menu m1
+        LEFT JOIN menu m2 ON m1.id = m2.parentId
+        LEFT JOIN role_menu rm ON m2.id = rm.mid
+        LEFT JOIN user_role ur ON ur.rid = rm.rid
+        <trim prefix="where">
+            <if test="userId!=null">
+                ur.uid = #{userId}
+            </if>
+        </trim>
+        ORDER BY
+        m1.`id`,
+        m2.`id`
     </select>
 
     <select id="getAllMenusWithRole" resultMap="MenuWithRole">
-        select m.*,r.id as rid,r.name as rname ,r.nameZh as rnameZh from Menu m right join role_menu rm on rm.mid=m.id left join role r on rm.rid=r.id
+        select m.*, r.id as rid, r.name as rname, r.nameZh as rnameZh
+        from Menu m
+                 right join role_menu rm on rm.mid = m.id
+                 left join role r on rm.rid = r.id
+    </select>
+
+    <select id="getMenuTree" resultMap="MenuSideBar">
+        SELECT
+            m1.*,
+            m2.id as id2,
+            m2.path as path2,
+            m2.component as component2,
+            m2.title as title2,
+            m2.name as name2,
+            m2.iconCls as iconCls2,
+            m2.keepAlive as keepAlive2,
+            m2.requireAuth as requireAuth2,
+            m2.parentId as parentId2,
+            m2.enabled as enabled2
+        FROM
+            menu m1
+                LEFT JOIN menu m2 ON m1.id = m2.parentId
+        where m1.parentId=1
     </select>
 
 </mapper>

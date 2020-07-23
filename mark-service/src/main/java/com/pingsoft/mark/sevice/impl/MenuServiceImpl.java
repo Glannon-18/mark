@@ -32,4 +32,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public List<Menu> getMenuSideBar(Long userId) {
         return menuMapper.getMenuSideBar(userId);
     }
+
+    @Override
+    public List<Menu> getMenuTree() {
+        return menuMapper.getMenuTree();
+    }
 }

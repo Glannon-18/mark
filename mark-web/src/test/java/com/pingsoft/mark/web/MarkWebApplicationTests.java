@@ -57,8 +57,14 @@ class MarkWebApplicationTests {
     }
 
     @Test
-    void test4(){
+    void test4() {
         roleService.selectByUserId(1l);
+    }
+
+    @Test
+    void test5() {
+        List<Menu> menuTree = iMenuService.getMenuTree();
+        LOGGER.info(menuTree.toString());
     }
 }
 

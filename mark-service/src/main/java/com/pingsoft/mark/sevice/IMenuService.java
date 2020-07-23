@@ -19,4 +19,6 @@ public interface IMenuService extends IService<Menu> {
 
     List<Menu> getMenuSideBar(Long userId);
 
+    List<Menu> getMenuTree();
+
 }
