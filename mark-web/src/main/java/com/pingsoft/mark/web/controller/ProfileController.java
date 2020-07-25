@@ -86,4 +86,15 @@ public class ProfileController {
         return RespBean.ok(result);
     }
 
+    @PutMapping("/setUsername")
+    public RespBean setName(@RequestParam String username) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.set("username", username).eq("id", user.getId());
+        userService.update(userUpdateWrapper);
+        HashMap<String, String> result = new HashMap<>();
+        result.put("updateName", username);
+        return RespBean.ok("修改成功！", result);
+    }
+
 }
