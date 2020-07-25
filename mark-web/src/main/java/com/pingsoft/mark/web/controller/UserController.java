@@ -71,8 +71,8 @@ public class UserController {
         return RespBean.ok(count);
     }
 
-    @GetMapping("/selectAll")
-    public RespBean selectAll() {
+    @GetMapping("/selectAllRole")
+    public RespBean selectAllRole() {
         QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
         roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
         List<Role> roles = roleService.getBaseMapper().selectList(roleQueryWrapper);
