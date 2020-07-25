@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2020-06-12
  */
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/system/role")
 public class RoleController {
 
     @Resource

@@ -2,18 +2,15 @@ package com.pingsoft.mark.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.pingsoft.mark.pojo.*;
-import com.pingsoft.mark.sevice.IMenuService;
-import com.pingsoft.mark.sevice.IRoleService;
+import com.pingsoft.mark.pojo.RespBean;
+import com.pingsoft.mark.pojo.RespPageBean;
+import com.pingsoft.mark.pojo.User;
 import com.pingsoft.mark.sevice.IUserService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>
@@ -24,35 +21,12 @@ import java.util.List;
  * @since 2020-06-12
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system/user")
 public class UserController {
 
     @Resource
     private IUserService userService;
 
-    @Resource
-    private IMenuService menuService;
-
-    @Resource
-    private IRoleService roleService;
-
-    @GetMapping("/info")
-    public RespBean info() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.select("username", "photo").eq("id", user.getId());
-        User user1 = userService.getOne(userQueryWrapper);
-        List<Role> roles = roleService.selectByUserId(user.getId());
-        user1.setRoleList(roles);
-        return RespBean.ok(user1);
-    }
-
-    @GetMapping("/menu")
-    public RespBean menu() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Menu> menuList = menuService.getMenuSideBar(user.getId());
-        return RespBean.ok(menuList);
-    }
 
     @PostMapping("/")
     public RespBean createUser(@RequestBody JSONObject jsonObject) {
