@@ -2,15 +2,20 @@ package com.pingsoft.mark.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
+import com.pingsoft.mark.pojo.Role;
 import com.pingsoft.mark.pojo.User;
+import com.pingsoft.mark.sevice.IRoleService;
 import com.pingsoft.mark.sevice.IUserService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -26,6 +31,9 @@ public class UserController {
 
     @Resource
     private IUserService userService;
+
+    @Resource
+    private IRoleService roleService;
 
 
     @PostMapping("/")
@@ -61,6 +69,14 @@ public class UserController {
     public RespBean checkAccountName(@RequestParam String account, @RequestParam String userId) {
         Integer count = userService.selectCountByAccount(account, StringUtils.isEmpty(userId) ? null : Long.valueOf(userId));
         return RespBean.ok(count);
+    }
+
+    @GetMapping("/selectAll")
+    public RespBean selectAll() {
+        QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
+        roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
+        List<Role> roles = roleService.getBaseMapper().selectList(roleQueryWrapper);
+        return RespBean.ok(roles);
     }
 
 }

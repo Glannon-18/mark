@@ -67,13 +67,6 @@ public class RoleController {
         return RespBean.ok(roles);
     }
 
-    @GetMapping("/selectAll")
-    public RespBean selectAll() {
-        QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
-        roleQueryWrapper.eq("discard", Constant.NOT_DELETE);
-        List<Role> roles = roleService.getBaseMapper().selectList(roleQueryWrapper);
-        return RespBean.ok(roles);
-    }
 
     @GetMapping("/getMenuTree")
     public RespBean getMenuTree() {
