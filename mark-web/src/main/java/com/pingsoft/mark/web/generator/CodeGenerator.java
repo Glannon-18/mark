@@ -46,7 +46,7 @@ public class CodeGenerator {
                 return super.processTypeConvert(globalConfig, fieldType);
             }
         });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
         dsc.setUrl("jdbc:mysql://localhost:3306/mark?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false");
