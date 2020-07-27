@@ -20,7 +20,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setAuthor("wkw");
-        gc.setOutputDir("D:\\mark_eee");
+        gc.setOutputDir("D:\\wkw\\mark_eee");
         gc.setFileOverride(false);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -56,8 +56,8 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
 //        strategy.setTablePrefix(new String[]{"user_"});// 此处可以修改为您的表前缀
-        strategy.setNaming(NamingStrategy.no_change);// 表名生成策略
-        strategy.setInclude(new String[]{"user", "menu", "role", "user_role", "role_menu"}); // 需要生成的表
+        strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+        strategy.setInclude(new String[]{"group", "pair_type"}); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -81,7 +81,9 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.pingsoft.mark.web");
+        pc.setParent("com.pingsoft.mark");
+        pc.setEntity("pojo");
+        pc.setXml("mapper");
 //        pc.setModuleName("test");
         mpg.setPackageInfo(pc);
 
