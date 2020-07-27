@@ -11,11 +11,27 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 23/07/2020 17:52:36
+ Date: 27/07/2020 17:49:19
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for group
+-- ----------------------------
+DROP TABLE IF EXISTS `group`;
+CREATE TABLE `group`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `discard` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for menu
@@ -58,6 +74,22 @@ INSERT INTO `menu` VALUES (15, '/system/type/**', '/system/type', 'System_type',
 INSERT INTO `menu` VALUES (16, '/system/label/**', '/system/label', 'System_label', '标注管理', 'system_label', 'sign', NULL, 1, 5, 1);
 
 -- ----------------------------
+-- Table structure for pair_type
+-- ----------------------------
+DROP TABLE IF EXISTS `pair_type`;
+CREATE TABLE `pair_type`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `discard` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pair_type
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -68,7 +100,7 @@ CREATE TABLE `role`  (
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `nameZh` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
@@ -92,7 +124,7 @@ CREATE TABLE `role_menu`  (
   INDEX `mid`(`mid`) USING BTREE,
   CONSTRAINT `role_menu_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `role_menu_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
@@ -133,7 +165,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '习近平', NULL, '17787877878', b'1', '3b7ab01b-ca85-4582-bce7-0170ddfac4c5.jpg');
+INSERT INTO `user` VALUES (1, '0', '2020-06-13 10:46:03', 'admin', '$2a$10$PLQOwQJtPix2Tl0faXyQA.IrBFzYSYWQ/P.q3qgdqGDqEY/g0Ahdq', '习近平9', NULL, '17787877878', b'1', '2ac74148-74ff-4462-aa8e-b5745362c582.jpg');
 INSERT INTO `user` VALUES (3, '0', '2020-07-22 11:01:08', 'uuuu', '$2a$10$3AEnhGFYABDlMbbxrr0JcOSkhZc62bWz36qoEFmy6VQeBA6QF0Ew.', 'uuuii', NULL, '14478752585', b'1', NULL);
 
 -- ----------------------------
@@ -149,14 +181,12 @@ CREATE TABLE `user_role`  (
   INDEX `rid`(`rid`) USING BTREE,
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES (1, 1, 1);
-INSERT INTO `user_role` VALUES (2, 1, 3);
-INSERT INTO `user_role` VALUES (3, 1, 2);
-INSERT INTO `user_role` VALUES (4, 3, 3);
+INSERT INTO `user_role` VALUES (7, 3, 3);
+INSERT INTO `user_role` VALUES (11, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
