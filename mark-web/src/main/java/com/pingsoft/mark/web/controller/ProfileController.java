@@ -94,7 +94,7 @@ public class ProfileController {
         userService.update(userUpdateWrapper);
         HashMap<String, String> result = new HashMap<>();
         result.put("updateName", username);
-        return RespBean.ok("修改成功！", result);
+        return RespBean.ok("修改用户名成功！", result);
     }
 
 }
