@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             response.setContentType("application/json;charset=utf-8");
             response.setStatus(200);
             PrintWriter out = response.getWriter();
-            out.write(new ObjectMapper().writeValueAsString(RespBean.ok("注销成功")));
+            out.write(new ObjectMapper().writeValueAsString(RespBean.ok("注销成功！")));
             out.flush();
             out.close();
         }).permitAll().and()
