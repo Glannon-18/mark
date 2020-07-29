@@ -56,7 +56,7 @@ public class UserController {
     @PutMapping("/{id}")
     public RespBean updateUser(@PathVariable String id, @RequestBody JSONObject jsonObject) {
         userService.update(id, jsonObject);
-        return RespBean.ok("修改用户成功！");
+        return RespBean.ok("编辑用户成功！");
     }
 
     @DeleteMapping("/{id}")
