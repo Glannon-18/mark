@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
         HttpServletRequest req = request;
         String jwtToken = req.getHeader("authorization");
         if (ObjectUtils.isEmpty(jwtToken)) {
-            RespBean respBean = RespBean.error("还未登陆！");
+            RespBean respBean = RespBean.error("还未登陆的请求！");
             HttpServletResponse resp = response;
             resp.setContentType("application/json;charset=utf-8");
             resp.setStatus(401);
