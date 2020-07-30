@@ -43,7 +43,6 @@ public class JwtFilter extends OncePerRequestFilter {
             Claims claims = Jwts.parser().setSigningKey(Constant.TOKEN_KEY).parseClaimsJws(jwtToken.replace("Bearer", ""))
                     .getBody();
 
-            //获取当前登录用户名
 //            String username = claims.getSubject();
             User user = new User();
             user.setId(Long.valueOf(claims.get("userId").toString()));
