@@ -9,7 +9,6 @@ import com.pingsoft.mark.pojo.Group;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
 import com.pingsoft.mark.service.IGroupService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,7 +22,7 @@ import java.time.LocalDateTime;
  * @author wkw
  * @since 2020-07-27
  */
-@Controller
+@RestController
 @RequestMapping("/system/team")
 public class GroupController {
 

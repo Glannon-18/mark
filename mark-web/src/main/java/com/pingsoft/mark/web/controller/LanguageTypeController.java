@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author wkw
- * @since 2020-06-12
+ * @since 2020-07-31
  */
 @RestController
-@RequestMapping("/role_menu")
-public class Role_menuController {
+@RequestMapping("/system/languageType")
+public class LanguageTypeController {
 
 }
