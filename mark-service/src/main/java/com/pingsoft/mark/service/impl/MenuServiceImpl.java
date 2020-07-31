@@ -1,9 +1,9 @@
-package com.pingsoft.mark.sevice.impl;
+package com.pingsoft.mark.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pingsoft.mark.mapper.MenuMapper;
 import com.pingsoft.mark.pojo.Menu;
-import com.pingsoft.mark.sevice.IMenuService;
+import com.pingsoft.mark.service.IMenuService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

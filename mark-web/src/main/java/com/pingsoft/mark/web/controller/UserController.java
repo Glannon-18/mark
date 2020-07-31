@@ -9,8 +9,8 @@ import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
 import com.pingsoft.mark.pojo.Role;
 import com.pingsoft.mark.pojo.User;
-import com.pingsoft.mark.sevice.IRoleService;
-import com.pingsoft.mark.sevice.IUserService;
+import com.pingsoft.mark.service.IRoleService;
+import com.pingsoft.mark.service.IUserService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 

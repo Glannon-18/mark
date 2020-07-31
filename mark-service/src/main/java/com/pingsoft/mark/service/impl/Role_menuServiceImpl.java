@@ -1,9 +1,9 @@
-package com.pingsoft.mark.sevice.impl;
+package com.pingsoft.mark.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pingsoft.mark.mapper.Role_menuMapper;
 import com.pingsoft.mark.pojo.Role_menu;
-import com.pingsoft.mark.sevice.IRole_menuService;
+import com.pingsoft.mark.service.IRole_menuService;
 import org.springframework.stereotype.Service;
 
 /**

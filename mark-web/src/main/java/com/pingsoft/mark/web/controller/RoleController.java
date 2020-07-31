@@ -7,8 +7,8 @@ import com.pingsoft.mark.pojo.Menu;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
 import com.pingsoft.mark.pojo.Role;
-import com.pingsoft.mark.sevice.IMenuService;
-import com.pingsoft.mark.sevice.IRoleService;
+import com.pingsoft.mark.service.IMenuService;
+import com.pingsoft.mark.service.IRoleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

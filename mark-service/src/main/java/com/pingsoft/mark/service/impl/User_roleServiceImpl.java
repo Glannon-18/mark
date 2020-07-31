@@ -1,10 +1,10 @@
-package com.pingsoft.mark.sevice.impl;
+package com.pingsoft.mark.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pingsoft.mark.mapper.User_roleMapper;
 import com.pingsoft.mark.pojo.User_role;
-import com.pingsoft.mark.sevice.IUser_roleService;
+import com.pingsoft.mark.service.IUser_roleService;
 import org.springframework.stereotype.Service;
 
 /**

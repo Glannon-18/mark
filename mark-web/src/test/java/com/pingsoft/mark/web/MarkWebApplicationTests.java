@@ -1,9 +1,9 @@
 package com.pingsoft.mark.web;
 
 import com.pingsoft.mark.pojo.Menu;
-import com.pingsoft.mark.sevice.IMenuService;
-import com.pingsoft.mark.sevice.IRoleService;
-import com.pingsoft.mark.sevice.IUserService;
+import com.pingsoft.mark.service.IMenuService;
+import com.pingsoft.mark.service.IRoleService;
+import com.pingsoft.mark.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

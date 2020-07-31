@@ -1,4 +1,4 @@
-package com.pingsoft.mark.sevice.impl;
+package com.pingsoft.mark.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,8 +9,8 @@ import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.mapper.RoleMapper;
 import com.pingsoft.mark.pojo.Role;
 import com.pingsoft.mark.pojo.Role_menu;
-import com.pingsoft.mark.sevice.IRoleService;
-import com.pingsoft.mark.sevice.IRole_menuService;
+import com.pingsoft.mark.service.IRoleService;
+import com.pingsoft.mark.service.IRole_menuService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;

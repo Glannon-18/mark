@@ -2,7 +2,7 @@ package com.pingsoft.mark.web.config;
 
 import com.pingsoft.mark.pojo.Menu;
 import com.pingsoft.mark.pojo.Role;
-import com.pingsoft.mark.sevice.IMenuService;
+import com.pingsoft.mark.service.IMenuService;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;

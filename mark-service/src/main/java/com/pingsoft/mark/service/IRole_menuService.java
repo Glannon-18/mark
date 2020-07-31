@@ -1,4 +1,4 @@
-package com.pingsoft.mark.sevice;
+package com.pingsoft.mark.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
