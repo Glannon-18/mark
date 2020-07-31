@@ -8,7 +8,7 @@ import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.pojo.Group;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
-import com.pingsoft.mark.sevice.IGroupService;
+import com.pingsoft.mark.service.IGroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

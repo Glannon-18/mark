@@ -8,7 +8,7 @@ import com.pingsoft.mark.Constant;
 import com.pingsoft.mark.pojo.PairType;
 import com.pingsoft.mark.pojo.RespBean;
 import com.pingsoft.mark.pojo.RespPageBean;
-import com.pingsoft.mark.sevice.IPairTypeService;
+import com.pingsoft.mark.service.IPairTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
